@@ -1,0 +1,22 @@
+<%= form_with(model: radio_host, local: true) do |form| %>
+  <% if radio_host.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(radio_host.errors.count, "error") %> prohibited this radio_host from being saved:</h2>
+
+      <ul>
+      <% radio_host.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

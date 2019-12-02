@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Labels</h1>
+<%= link_to 'New Label', new_label_path, class: "btn btn-primary"  %>
+<br><br>
+<div class="table-responsive">
+  <table class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th colspan="2"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @labels.each do |label| %>
+        <tr>
+          <td><%= label.name %></td>
+          <td><%= label.description %></td>
+          <td><%= link_to 'Edit', edit_label_path(label) %></td>
+          <td><%= link_to 'Destroy', label, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Radio Hosts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @radio_hosts.each do |radio_host| %>
+      <tr>
+        <td><%= radio_host.name %></td>
+        <td><%= link_to 'Show', radio_host %></td>
+        <td><%= link_to 'Edit', edit_radio_host_path(radio_host) %></td>
+        <td><%= link_to 'Destroy', radio_host, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Radio Host', new_radio_host_path %>

@@ -1,0 +1,20 @@
+<div class="col-lg-6">
+	<div class="card">
+	  <%= image_tag("dummy.jpg", class: "img-fluid") %>
+	  <div class="card-body">
+	    <h4 class="card-title"><%= post.name %></h4>
+	    <p class="card-text"><%= post.content %></p>
+	    <p><strong><%= post.created_at.strftime("%d/%m/%Y") %></strong></p>
+	  </div>
+	  <ul class="list-group list-group-flush">
+	    <li class="list-group-item">
+	      <% post.categories.each do |category| %>
+	        <%= link_to category.name, category_url(category), class: "badge badge-pill badge-primary" %>
+	      <% end %>
+	      <% post.labels.each do |label| %>
+	        <%= link_to label.name, label_url(label), class: "badge badge-pill badge-success" %>
+	      <% end %>
+	    </li>
+	  </ul>
+	</div>
+</div>

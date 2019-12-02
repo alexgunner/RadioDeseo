@@ -1,0 +1,52 @@
+<%= form_with(model: post, local: true) do |form| %>
+  <% if post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+      <% post.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :post_name, class: "form-control" %>
+    <small class="form-text text-muted">Name of the post</small>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :content %>
+    <%= form.text_area :content, id: :post_content, class: "form-control" %>
+    <small class="form-text text-muted">The post content goes here</small>
+  </div>
+
+  <div class="form-group">
+    Categories:<br>
+    <% @categories.each do |category| %>
+      <div class="form-check form-check-inline">      
+        <%= check_box_tag "categories[#{category.id}]", "1", if post.has_category(category.id) then true else false end, class: "form-check-input", id: "checkcategory#{category.id}" %>
+        <%= label_tag category.name, nil, class: "form-check-label", for: "checkcategory#{category.id}" %>
+      </div>
+    <% end %>
+    <small class="form-text text-muted">Select the categories for this post</small>
+  </div>
+
+  <div class="form-group">
+    Labels:<br>
+    <% @labels.each do |label| %>
+      <div class="form-check form-check-inline">
+        <%= check_box_tag "labels[#{label.id}]", "1", if post.has_label(label.id) then true else false end, class: "form-check-input", id: "checklabel#{label.id}" %>
+        <%= label_tag label.name, nil, class: "form-check-label", for: "checklabel#{label.id}" %>
+      </div>
+    <% end %>
+    <small class="form-text text-muted">Select the labels for this post</small>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Accept", class: "btn btn-success" %>
+    <%= link_to "Back", posts_url, class: "btn btn-danger" %>
+  </div>
+<% end %>

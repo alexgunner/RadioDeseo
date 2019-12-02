@@ -1,0 +1,29 @@
+<div class="card">
+  <%= image_tag("dummy.jpg", class: "img-fluid") %>
+  <div class="card-body">
+    <h4 class="card-title"><%= radio_show.name %></h4>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">
+      <h6>Conductores:</h6>
+      <% radio_show.hosts.each do |host| %>
+        <%= link_to host.name, radio_host_url(host), class: "badge badge-pill badge-primary" %>
+      <% end %>
+    </li>
+  </ul>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-sm-6 col-lg-6">
+        <%= link_to edit_radio_show_path(radio_show), class: "btn btn-primary btn-block form-button" do %>   
+          <i class="fas fa-edit "></i>
+        <% end %>
+      </div>
+      <div class="col-sm-6 col-lg-6">
+        <%= link_to radio_show, method: :delete, data: { confirm: '¿Estás segur@?' }, class: "btn btn-secondary btn-block form-button" do %>
+          <i class="fas fa-trash "></i>
+        <% end %>
+      </div>
+    </div>
+    
+  </div>
+</div>
