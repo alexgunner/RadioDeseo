@@ -13,12 +13,17 @@
   </ul>
   <div class="card-body">
     <div class="row">
-      <div class="col-sm-6 col-lg-6">
+      <div class="col-sm-4 col-lg-4">
         <%= link_to edit_radio_show_path(radio_show), class: "btn btn-primary btn-block form-button" do %>   
           <i class="fas fa-edit "></i>
         <% end %>
       </div>
-      <div class="col-sm-6 col-lg-6">
+      <div class="col-sm-4 col-lg-4">
+        <%= link_to '/radio_shows/' + radio_show.id.to_s + '/schedules', class: "btn btn-primary btn-block form-button" do %>   
+          <i class="fas fa-edit "></i>
+        <% end %>
+      </div>
+      <div class="col-sm-4 col-lg-4">
         <%= link_to radio_show, method: :delete, data: { confirm: '¿Estás segur@?' }, class: "btn btn-secondary btn-block form-button" do %>
           <i class="fas fa-trash "></i>
         <% end %>

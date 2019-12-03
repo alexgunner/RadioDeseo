@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Horarios del programa <%= @radio_show.name %></h1>
+
+<%= link_to 'Agregar horario', '/radio_shows/' + @radio_show.id.to_s + '/schedules/new', class: "btn btn-primary" %>
+<br><br>
+
+<div class="table-responsive">
+  <table class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>Días</th>
+        <th>Hora de inicio</th>
+        <th>Hora de fin</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @schedules.each do |schedule| %>
+        <tr>
+          <td>
+            <% schedule.radio_schedule.show_days.each do |day| %>
+              <%= day %><br>
+            <% end %>
+          </td>
+          <td>
+            <%= schedule.radio_schedule.starts_at.strftime("%H:%M") %>
+          </td>
+          <td>
+            <%= schedule.radio_schedule.ends_at.strftime("%H:%M") %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+
+

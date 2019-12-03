@@ -27,22 +27,6 @@
     <small class="form-text text-muted">Select the hosts for this show</small>
   </div>
 
-  <div class="form-group">
-    Days:<br>
-    <% @days.each_with_index do |day, index| %>
-      <div class="form-check form-check-inline">      
-        <%= check_box_tag "days[#{index}]", nil, class: "form-check-input", id: "days#{index}" %>
-        <%= label_tag day, nil, class: "form-check-label", for: "days#{index}" %>
-      </div>
-    <% end %>
-    <small class="form-text text-muted">Select the hosts for this show</small>
-  </div>
-
-  <div class="form-group">
-    <%= label_tag "Horas" %>
-    <%= text_field_tag :starts_at, nil, type: "time" %>
-  </div>
-
   <div class="actions">
     <%= form.submit %>
   </div>

@@ -1,5 +1,5 @@
 class RadioShowsController < ApplicationController
-  before_action :set_radio_show, only: [:show, :edit, :update, :destroy]
+  before_action :set_radio_show, only: [:show, :edit, :update, :destroy, :schedules, :new_schedule, :create_schedule]
 
   # GET /radio_shows
   # GET /radio_shows.json
@@ -16,13 +16,13 @@ class RadioShowsController < ApplicationController
   def new
     @radio_show = RadioShow.new
     @hosts = RadioHost.all.reverse
-    @days = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday",]
+    
   end
 
   # GET /radio_shows/1/edit
   def edit
     @hosts = RadioHost.all.reverse
-    @days = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday",]
+    
   end
 
   # POST /radio_shows
@@ -75,6 +75,32 @@ class RadioShowsController < ApplicationController
     end
   end
 
+  def schedules
+    @schedules = @radio_show.show_schedules
+  end
+
+  def new_schedule
+    @days = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"]
+  end
+
+  def create_schedule
+    days_number = ""
+    days_result = fixed_array(7, ["0", "0", "0", "0", "0", "0", "0"])
+    start_time = params[:start_time]
+    end_time = params[:end_time]
+    days = params[:days]
+    days.each do |day|
+      days_result[day.first.to_i] = "1"
+    end
+    days_result.each do |result|
+      days_number += result
+    end
+    radio_schedule = RadioSchedule.create starts_at: start_time, ends_at: end_time, days: days_number.to_i(2)
+
+    ShowSchedule.create radio_show: @radio_show, radio_schedule: radio_schedule
+    redirect_to '/radio_shows/' + @radio_show.id.to_s + '/schedules'
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_radio_show
@@ -84,5 +110,9 @@ class RadioShowsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def radio_show_params
       params.require(:radio_show).permit(:name)
+    end
+
+    def fixed_array(size, other)  
+       Array.new(size) { |i| other[i] }
     end
 end
